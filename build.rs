@@ -21,5 +21,5 @@ fn main() {
         .write_to_file(out_path.join("arithm_bindings.rs"))
         .expect("Couldn't write bindings!");
 
-    // cc::Build::new().file("arith.c").compile("arith");
+    cc::Build::new().file("arith.c").compile("arith");
 }

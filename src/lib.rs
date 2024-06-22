@@ -88,3 +88,101 @@ pub fn divide(numerator: i32, denominator: i32) -> Result<f64, ArithError> {
         Ok(c_res)
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn addition_commutative() {
+        assert_eq!(super::add(1, 2), super::add(2, 1));
+    }
+
+    #[test]
+    fn addition_well_behaved() {
+        assert_eq!(super::add(1, 2), Ok(3));
+        assert_ne!(super::add(i32::MAX, -2), Err(super::ArithError::Overflow));
+    }
+
+    #[test]
+    fn addition_overflow() {
+        assert_eq!(super::add(3, i32::MAX), Err(super::ArithError::Overflow));
+    }
+
+    #[test]
+    fn addition_underflow() {
+        assert_eq!(super::add(-3, i32::MIN), Err(super::ArithError::Underflow));
+    }
+
+    #[test]
+    fn subtraction_anti_commutative() {
+        assert_eq!(super::subtract(1, 2), super::subtract(2, 1).map(|x| -x));
+        assert_eq!(
+            super::subtract(i32::MAX, 2),
+            super::subtract(2, i32::MAX).map(|x| -x)
+        );
+    }
+
+    #[test]
+    fn subtraction_well_behaved() {
+        assert_eq!(super::subtract(1, 2), Ok(-1));
+        assert_eq!(super::subtract(1, -2), Ok(3));
+    }
+
+    #[test]
+    fn subtraction_overflow() {
+        assert_eq!(
+            super::subtract(3, -i32::MAX),
+            Err(super::ArithError::Overflow)
+        );
+    }
+
+    #[test]
+    fn subtraction_underflow() {
+        assert_eq!(
+            super::subtract(i32::MIN, 3),
+            Err(super::ArithError::Underflow)
+        );
+    }
+
+    #[test]
+    fn division_well_behaved() {
+        assert_eq!(super::divide(1, 2), Ok(0.5));
+        assert_eq!(super::divide(1, -2), Ok(-0.5));
+        assert_eq!(super::divide(-1, 2), Ok(-0.5));
+        assert_eq!(super::divide(-1, -2), Ok(0.5));
+    }
+
+    #[test]
+    fn division_by_zero() {
+        assert_eq!(super::divide(1, 0), Err(super::ArithError::DivisionByZero));
+    }
+
+    #[test]
+    fn multiplication_commutative() {
+        assert_eq!(super::multiply(1, 2), super::multiply(2, 1));
+    }
+
+    #[test]
+    fn multiplication_well_behaved() {
+        assert_eq!(super::multiply(1, 2), Ok(2));
+        assert_eq!(super::multiply(1, -2), Ok(-2));
+        assert_eq!(super::multiply(-1, 2), Ok(-2));
+        assert_eq!(super::multiply(-1, -2), Ok(2));
+    }
+
+    #[test]
+    fn multiplication_overflow() {
+        assert_eq!(
+            super::multiply(i32::MAX, 3),
+            Err(super::ArithError::Overflow)
+        );
+    }
+
+    #[test]
+    fn multiplication_underflow() {
+        assert_eq!(
+            super::multiply(i32::MAX, -2),
+            Err(super::ArithError::Underflow)
+        );
+    }
+}
