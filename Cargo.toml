@@ -1,0 +1,11 @@
+[package]
+name = "EADHW"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "0.65.1"
+cc = "1.0.99"
