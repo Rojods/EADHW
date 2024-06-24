@@ -19,5 +19,5 @@ This is because the exact number of bits for integers is unknown so that e.g. a 
 In any case, these could be optimized later without jeopardizing the shared library and its Rust API as presented in this repo.
 
 Finally, there is basically no application developed as the focus is the library.
-The main rust executable is a simple CLI program that takes two numbers and performed one of the desired operations on it.
+The main rust executable is a simple CLI program that takes two numbers and performs one of the desired operations on it.
 Just try running executable (or with `-h`) and you will get a prompt telling you how to use it.
