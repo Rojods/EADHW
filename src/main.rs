@@ -7,7 +7,7 @@ struct Args {
         short,
         long,
         default_value = "add",
-        help = "Operation to perform. Possible_values: 'add', 'sub', 'div', 'mul'"
+        help = "Operation to perform. Possible_values: 'add', 'sub', 'div', 'mul'. Default: 'add'."
     )]
     operation: String,
     left_number: i32,

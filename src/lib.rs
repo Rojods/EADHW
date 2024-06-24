@@ -11,7 +11,7 @@ mod carithm {
     include!(concat!(env!("OUT_DIR"), "/arithm_bindings.rs"));
 }
 
-/// Possible errors encounreted while performing arithmetic operations.
+/// Possible errors encountered while performing arithmetic operations.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum ArithError {
     Overflow,
